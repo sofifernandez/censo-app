@@ -1,0 +1,14 @@
+.bg-image {
+    background-image: url('../../../public/img/descarga.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    height: 100vh;
+}
+
+.registerLoginSection{
+        background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}

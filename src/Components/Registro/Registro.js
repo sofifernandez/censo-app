@@ -1,22 +1,11 @@
-import React from "react";
-import { useState } from "react";
-import "./Login.css";
+import React from 'react'
 
-export const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Implement your login logic here
-    console.log("Username:", username);
-    console.log("Password:", password);
-  };
-
+export const Registro = () => {
   return (
       <div class="row justify-content-center align-items-center">
+        
           <form>
-            <h2 class="text-center">Ingresar</h2>
+            <h2 class="text-center">Registro</h2>
             <div class="form-group mb-2">
               <input
                 type="text"
@@ -33,12 +22,14 @@ export const Login = () => {
                 required
               />
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
-              Ingresar
+            <button type="button" class="btn btn-outline-primary btn-block">
+              Aceptar
             </button>
           </form>
         </div>
-  );
-};
 
-//export default Login
+    
+  )
+}
+
+//export default Registro
