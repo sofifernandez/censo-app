@@ -1,0 +1,80 @@
+#btnSalir div {
+  color: var(--rosado);
+}
+
+.header {
+  background-color: #31d0b9;
+  font-weight: 900;
+  margin-left: 0;
+  padding: 24px;
+}
+
+.headerTitle {
+  font-weight: 900;
+  font-size: 2rem;
+  border: #000;
+}
+
+.heroline {
+  height: 2px;
+  background-color: #121213;
+}
+
+.header-category {
+  position: relative;
+  display: inline-block;
+  margin-top: 16px;
+  margin-right: 8px;
+}
+
+.header-links {
+  position: relative;
+  display: flex;
+  padding: 2px 4px 2px 16px;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #121213;
+  border-radius: 100px;
+  background-color: #fff;
+  text-decoration: none;
+  box-shadow: 5px 5px #888888;
+}
+
+.header-category-tag {
+  margin-right: 8px;
+  color: #121213;
+  font-size: 25px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.header-tag-circle {
+  width: 32px;
+  height: 32px;
+  align-items: flex-end;
+  border: 1px solid #000;
+  border-radius: 20px;
+}
+
+.header-tag-cilinder {
+  width: 40px;
+  height: 32px;
+  align-items: flex-end;
+  border: 1px solid #000;
+  border-radius: 20px;
+}
+
+.rosado {
+  background-color: var(--rosado);
+}
+
+.violeta {
+  background-color: var(--violeta);
+}
+
+.verde {
+  background-color: var(--violeta);
+  color:white;
+    font-weight: 500;
+}

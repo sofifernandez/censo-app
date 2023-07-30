@@ -1,0 +1,37 @@
+.mainAddPersonCard {
+    background-color: var(--violetaClaro);
+    border-radius: 1rem;
+    border: 3px solid black;
+    box-shadow: 3px 3px black;
+}
+
+
+.addPersonCateg {
+    background-color: white;
+    border-radius: 2rem;
+    border: 2px solid #000;
+    position:relative;
+    
+}
+
+.nameTitleCircle {
+    width: 32px;
+    height: 32px;
+    align-items: flex-end;
+    border: 2px solid #000;
+    border-radius: 20px;
+    background-color: #ffdb59;
+}
+
+.slcAddPeople{
+    background-color: #FFF8B9;
+    border-radius: 3rem;
+    border: 2px solid black;
+    box-shadow: 3px 3px black;
+}
+
+#birthdate{
+    background-color: #FFF8B9;
+    border-radius: 3rem;
+    box-shadow: 3px 3px black;
+}

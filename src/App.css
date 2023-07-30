@@ -1,4 +1,29 @@
-.App {
+.bg-Primario{
+  background-color: #6A59C3;
+}
+
+:root {
+  --violeta: #6A59C3;
+  --violetaClaro: #CDC7EB;
+  --verde: #31D0B9;
+  --amarillo: #FBE400;
+  --amarilloClaro: #FFF8B9;
+  --rosado: #F93167;
+  /* Example primary color: blue */
+}
+
+
+/* $grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+); */
+
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +60,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

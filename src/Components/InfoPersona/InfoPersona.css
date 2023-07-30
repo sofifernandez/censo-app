@@ -1,0 +1,17 @@
+.idListPeople {
+    width: fit-content;
+}
+
+.listCategory {
+    font-weight: 900;
+    background-color: var(--violetaClaro);
+}
+
+.listCategoryDelete{
+    color: var(--rosado);
+    border: 1px solid var(--rosado);
+    border-radius: 1rem;
+    border: 2px solid black;
+    box-shadow: 2px 2px rgb(54, 53, 53);
+    background-color: white;
+}

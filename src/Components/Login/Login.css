@@ -1,19 +1,41 @@
-
-
-
-/* Input with bottom border only */
-.input-bottom-border {
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-radius: 0;
-    border-bottom-width: 1px;
-    border-color: #ccc;
+.login_form {
+    background-color: #fff;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding-top: 1rem;
 }
 
-/* Centering the buttons */
-.btn-block {
-    margin-left: auto;
-    margin-right: auto;
+form {
+    padding: 0 2em;
+}
+
+.form__input {
+    width: 100%;
+    border: 0px solid transparent;
+    border-radius: 0;
+    border-bottom: 2px solid #aaa;
+    padding: 1em .5em .5em;
+    padding-left: 2em;
+    outline: none;
+    margin: 1.5em auto;
+    transition: all .5s ease;
+}
+
+.form__input:focus {
+    border-bottom-color: #6A59C3;
+    box-shadow: 0 0 5px rgba(106, 89, 195, 0.4);
+    border-radius: 4px;
+}
+
+.btn-Primario {
+    border-radius: 30px;
+    color:white;
+    font-weight: 800;
+    background-color: #6A59C3;
+    border: 2px solid black;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
 }
 
