@@ -1,0 +1,3 @@
+-ordenar alfabeticamente los departamentos?
+- una vez que se agrega persona, automaticamente renderizar
+- filtrar del array de departamentos y ocupaciones para mostrar las personas
