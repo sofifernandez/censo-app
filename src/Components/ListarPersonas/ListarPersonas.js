@@ -27,6 +27,7 @@ export const ListarPersonas = () => {
           setErrLista(datos.mensaje);
         } else {
           setCensados(datos.personas);
+          console.log(datos.personas)
         }
       });
   }, []);

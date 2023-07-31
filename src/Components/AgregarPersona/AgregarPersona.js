@@ -49,10 +49,11 @@ export const AgregarPersona = () => {
             ...formulario,
             [e.target.name]: e.target.value
         })
+        console.log(formulario)
   };
   
   //SUBMIT FORMS-*****************************************************
-    const onHandleAgregarPersona = async (e) => {
+    /* const onHandleAgregarPersona = async (e) => {
       e.preventDefault()
       setErrAgregar();
       setSucces();
@@ -73,8 +74,30 @@ export const AgregarPersona = () => {
         } else {
           setSucces(true);
       }
-    };
+    }; */
 
+    const onHandleAgregarPersona = async (e) => {
+      e.preventDefault()
+      setErrAgregar();
+      setSucces();
+        const res = await fetch('https://censo.develotion.com/personas.php' , {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              apikey: localStorage.getItem("apiKey"),
+              iduser: localStorage.getItem("id")
+            },
+            body: JSON.stringify( formulario )
+        })
+
+      const resJSON = await res.json()
+      console.log(resJSON)
+        if (resJSON.codigo!==200) {
+            setErrAgregar(resJSON.mensaje)
+        } else {
+          setSucces(true);
+      }
+    };
 
 
 
