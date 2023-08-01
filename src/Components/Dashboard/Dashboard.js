@@ -9,6 +9,7 @@ import { Mapa } from '../Mapa/Mapa.js'
 import { GraficoOcupacion } from '../GraficoOcupacion/GraficoOcupacion.js'
 import { guardarOcupaciones } from '../../features/ocupacionesSlice.js'
 import { guardarDptos } from '../../features/departamentosSlice.js'
+import { guardarPersonas } from '../../features/personasSlice.js'
 
 
 export const Dashboard = () => {
@@ -31,7 +32,7 @@ export const Dashboard = () => {
       .then((datos) => {
         dispatch(guardarOcupaciones(datos.ocupaciones))
       })
-  }, []);
+  }, [dispatch]);
 
 
   //OBTENER DEPARTAMENTOS, una vez, cuando se carga el dashboard
@@ -50,7 +51,32 @@ export const Dashboard = () => {
       .then((datos) => {
         dispatch(guardarDptos(datos.departamentos));
       })
-  }, []);
+  }, [dispatch]);
+
+  //OBTENER PERSONAS
+  useEffect(() => {
+    const apikey = localStorage.getItem("apiKey");
+    const user = localStorage.getItem("id");
+    fetch(`https://censo.develotion.com/personas.php?idUsuario=`+user, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: apikey,
+        idUser: user,
+      },
+    })
+      .then((r) => r.json())
+      .then((datos) => {
+        if (datos.codigo === 200) {
+          dispatch(guardarPersonas(datos.personas));
+        } 
+      });
+  });
+
+
+
+
+
 
   return (
     <>

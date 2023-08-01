@@ -17,4 +17,13 @@
     background-color: var(--violeta);
     color: white;
     border: 3px solid black;
+    border-radius: 4px;
+}
+
+.deleteFilterButton{
+    font-weight: 900;
+    background-color: var(--rosado);
+    color: white;
+    border: 3px solid black;
+    border-radius: 4px;
 }

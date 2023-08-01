@@ -1,7 +1,10 @@
 import React from "react";
 import "./NavBar.css";
+import { useSelector } from "react-redux";
 
 export const NavBar = () => {
+    const cantidadCensados = useSelector(state => state.personas.data.length)
+    
     return (
         <header className="header mb-5">
             <div className="heroline"></div>
@@ -12,7 +15,7 @@ export const NavBar = () => {
                 <div className="header-category">
                 <div className="header-links">
                     <div className="header-category-tag">Censados</div>
-                    <div className="header-tag-cilinder text-center verde">88</div>
+                        <div className="header-tag-cilinder text-center verde">{ cantidadCensados}</div>
                 </div>
             </div>
             <div className="header-category">

@@ -5,70 +5,86 @@ import { useSelector } from "react-redux";
 import { InfoPersona } from "../InfoPersona/InfoPersona";
 
 export const ListarPersonas = () => {
-  const [censados, setCensados] = useState([]);
-  const [errLista, setErrLista] = useState();
+  //const [errLista, setErrLista] = useState();
+  const ocupaciones = useSelector(state => state.ocupaciones.data)
+  const censados= useSelector(state => state.personas.data)
 
-  const ocupaciones=useSelector(state=>state.ocupaciones.data)
+  //const [censados, setCensados] = useState(initialStateCensados);
+  const [mensajeEliminar, setmensajeEliminar] = useState();
+  const [filtroOcupacion, setFiltroOcupacion] = useState(undefined);
+  const [censadosFiltrados, setCensadosFiltrados] = useState();
+
+
+
+  const handleChildMessage = (message) => {
+    setmensajeEliminar(message);
+  };
+
+  const handleFiltroOcupacion = (e) => {
+    setFiltroOcupacion(e.target.value)
+  };
+
+  const handleLimpiarFiltro = () => {
+    setFiltroOcupacion();
+    setCensadosFiltrados();
+  }
 
   useEffect(() => {
-    const apikey = localStorage.getItem("apiKey");
-    const user = localStorage.getItem("id");
-    fetch(`https://censo.develotion.com/personas.php?idUsuario=`+user, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        apikey: apikey,
-        idUser: user,
-      },
-    })
-      .then((r) => r.json())
-      .then((datos) => {
-        if (datos.codigo !== 200) {
-          setErrLista(datos.mensaje);
-        } else {
-          setCensados(datos.personas);
-          console.log(datos.personas)
-        }
-      });
-  }, []);
-
-
+    if (filtroOcupacion !== undefined) {
+      setCensadosFiltrados(censados.filter((c) => c.ocupacion === parseInt(filtroOcupacion)))
+    }
+  }, [filtroOcupacion, censados]);
 
   return (
     <div className="row col-12 col-sm-9 col-lg-7 justify-content-center">
       <div className="fs-2">LISTA DE PERSONAS </div>
-      {errLista !== undefined && (
+
+      {/* {errLista !== undefined && (
         <div className="row justify-content-center text-center text-danger">
           {errLista}
         </div>
-      )}
-      {censados.length === 0 ? (
-        <div className="alert alert-warning">No hay existencias</div>
-      ) : (
-        <div id="listarSection" className="mb-5 mx-auto py-3 px-0">
-          <div className="row mb-3 mx-auto justify-content-evenly">
-            <div className="col-3 pe-0 mx-2 listCategoryHeader">
-              Nombre completo
-            </div>
+      )} */}
 
-            <select
-              id="ocuFilter"
-              className="col-2 pe-0 mx-2 listCategoryHeader"
+      {mensajeEliminar &&
+        <span className={mensajeEliminar.codigo === 200 ? "alert alert-success" : "alert alert-danger"}>{mensajeEliminar.mensaje}</span>}
+      {censados.length===0 ? (<div className="alert alert-warning">No hay existencias</div>)
+        :
+        (
+          <div id="listarSection" className="mb-5 mx-auto py-3 px-0">
+            <div className="row mb-3 mx-auto justify-content-evenly">
+              <div className="col-3 pe-0 mx-2 listCategoryHeader">
+                Nombre completo
+              </div>
+
+              <select
+                id="ocuFilter"
+                className="col-2 pe-0 mx-2 listCategoryHeader"
+                value={filtroOcupacion}
+                onChange={handleFiltroOcupacion}
               >
-                <option value="option_value_1">Ocupacion</option>
-                {ocupaciones.map(ocupacion => <option value={ocupacion.id}>{ocupacion.ocupacion }</option>)}
-            </select>
+                <option value="">Ocupacion</option>
+                {ocupaciones.map(o => <option key={o.id} value={o.id}>{o.ocupacion}</option>)}
+              </select>
 
-            <div className="col-2 pe-0 mx-2 listCategoryHeader">
-              Departamento
+              <div className="col-2 pe-0 mx-2 listCategoryHeader">
+                Departamento
+              </div>
+              {
+                filtroOcupacion === undefined ?
+                <div className="col-2 pe-0 mx-2 "></div> :
+                <div className="col-2 pe-0 mx-2 deleteFilterButton" onClick={handleLimpiarFiltro}>Limpiar filtro</div>
+              }
             </div>
-            <div className="col-2 pe-0 mx-2 "></div>
+            {
+              censadosFiltrados === undefined ?
+                censados.map((c) => (<InfoPersona {...c} key={c.id} onMessage={handleChildMessage} />))
+                :
+                censadosFiltrados.map((c) => (<InfoPersona {...c} key={c.id} onMessage={handleChildMessage} />))
+            }
+            {/* {censados.map((c) => (
+              <InfoPersona {...c} key={c.id} onMessage={handleChildMessage} />))} */}
           </div>
-            {censados.map((c) => (
-              <InfoPersona {...c} id={c.id} />
-            ))}
-        </div>
-      )}
+        )}
     </div>
   );
 };
