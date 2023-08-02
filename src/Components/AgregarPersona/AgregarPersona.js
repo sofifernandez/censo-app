@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AgregarPersona.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux'
-import { agregarPersona, guardarPersonas } from '../../features/personasSlice.js'
+import { agregarPersona } from '../../features/personasSlice.js'
 
 export const AgregarPersona = () => {
 
@@ -136,9 +136,8 @@ export const AgregarPersona = () => {
             value={formulario.departamento}
           >
             <option value="">Seleccionar</option>
-            {departamentos.map((dep) => (
+            {departamentos.length>0 && departamentos.map((dep) => (
               <option key={dep.id} value={dep.id}>
-
                 {dep.nombre}
               </option>
             ))}
@@ -173,11 +172,12 @@ export const AgregarPersona = () => {
             value={formulario.ocupacion}
           >
             <option value="option_value_1">Seleccionar</option>
-            {ocupaciones.map((o) => (
-              <option key={o.id} value={o.id}>
-                {o.ocupacion}
-              </option>
-            ))}
+            {ocupaciones.length > 0 &&  ocupaciones.map((o) => (
+                                                                <option key={o.id} value={o.id}>
+                                                                  {o.ocupacion}
+                                                                </option>
+            ))
+            }
           </select>
         </div>
         <div className="row mx-auto text-center justify-content-center mb-3">

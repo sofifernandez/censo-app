@@ -1,3 +1,3 @@
--ordenar alfabeticamente los departamentos?
-- una vez que se agrega persona, automaticamente renderizar
-- filtrar del array de departamentos y ocupaciones para mostrar las personas
+- ordenar alfabeticamente los departamentos?
+- mandar al login si no está loggeado y quiere ingresar a /dashboard
+- viceversa, mandar al dashboard si está loggead e ingresa a '/'

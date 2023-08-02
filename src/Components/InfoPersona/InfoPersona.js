@@ -3,25 +3,22 @@ import "./InfoPersona.css";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-//import { buscarOcupacion } from "../../features/ocupacionesSlice";
 import { eliminarPersona } from "../../features/personasSlice";
 
 export const InfoPersona = ({ id, nombre, ocupacion, departamento, onMessage }) => {
-  const [nombreOcupacion, setNombreOcupacion] = useState();
-  const [nombreDpto, setNombreDpto] = useState();
+  const [nombreOcupacion, setNombreOcupacion] = useState([]);
+  const [nombreDpto, setNombreDpto] = useState([]);
   const ocup = useSelector((state) => state.ocupaciones.data);
   const dptos=useSelector((state) => state.departamentos.data);
-  const [mensaje, setMensaje] = useState();
+  const [mensaje, setMensaje] = useState("");
   const dispatch = useDispatch();
 
 
    useEffect(() => {
-    
     const filteredOcupacion = ocup.find((item) => item.id === parseInt(ocupacion));
     setNombreOcupacion(filteredOcupacion.ocupacion);
     const filteredDptos = dptos.find((item) => item.id === parseInt(departamento));
     setNombreDpto(filteredDptos.nombre)
-    //dispatch(buscarOcupacion(parseInt(ocupacion)))
   }, [ocupacion, ocup, departamento, dptos]);
  
   const onHandleEliminarPersona = async (e) => {

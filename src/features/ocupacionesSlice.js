@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [],
-  nombre: "No definido",
 };
 
 export const ocupacionesSlice = createSlice({
@@ -11,11 +10,6 @@ export const ocupacionesSlice = createSlice({
   reducers: {
     guardarOcupaciones: (state, action) => {
       state.data = action.payload;
-    },
-    buscarOcupacion: (state, action) => {
-      const filteredData = state.data.find((item) => item.id === action.payload
-      );
-      state.nombre = filteredData.ocupacion 
     },
   },
 });
