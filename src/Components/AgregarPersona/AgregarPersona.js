@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./AgregarPersona.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux'
-import { agregarPersona } from '../../features/personasSlice.js'
+import { agregarPersona, guardarPersonas } from '../../features/personasSlice.js'
 
 export const AgregarPersona = () => {
 
-    const initialFormData = {
+  const initialFormData = {
     "idUsuario": localStorage.getItem("id"),
     nombre: '',
     fechaNacimiento: '',
     departamento: '',
     ciudad: '',
-    ocupacion:''
+    ocupacion: ''
   };
 
   const ocupaciones = useSelector((state) => state.ocupaciones.data);
@@ -24,7 +24,7 @@ export const AgregarPersona = () => {
   const dispatch = useDispatch();
 
 
-    useEffect(() => {
+  useEffect(() => {
     fetch(
       `https://censo.develotion.com/ciudades.php?idDepartamento=${formulario.departamento}`,
       {
@@ -39,46 +39,59 @@ export const AgregarPersona = () => {
     )
       .then((response) => response.json())
       .then((datos) => {
-        setCiudades(datos.ciudades);
+        if (datos.codigo === 200) {
+          setCiudades(datos.ciudades);
+        }
       });
   }, [formulario.departamento]);
 
- 
-  //SET THE FORMS***************************************************8
-    const handleFormAgregar = (e) => {
-        setFormulario({
-            ...formulario,
-            [e.target.name]: e.target.value
-        })
-  };
-  
-  //SUBMIT FORMS-*****************************************************
-    const onHandleAgregarPersona = async (e) => {
-      e.preventDefault()
-      setErrAgregar();
-      setSucces();
-        const res = await fetch('https://censo.develotion.com/personas.php' , {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              apikey: localStorage.getItem("apiKey"),
-              iduser: localStorage.getItem("id")
-            },
-            body: JSON.stringify( formulario )
-        })
 
-      const resJSON = await res.json()
-      console.log(resJSON)
-        if (resJSON.codigo!==200) {
-            setErrAgregar(resJSON.mensaje)
-        } else {
-          setSucces(resJSON.mensaje);
-          console.log(resJSON);
-          console.log({...formulario, id: resJSON.idCenso})
-          dispatch(agregarPersona({ ...formulario, id: resJSON.idCenso }));
-          setFormulario(initialFormData);
-      }
-    };
+  //SET THE FORMS***************************************************8
+
+  const handleFormAgregar = (e) => {
+    if (isNaN(e.target.value)) {
+      setFormulario({
+        ...formulario,
+        [e.target.name]: e.target.value
+      })
+    }
+    else {
+      setFormulario({
+        ...formulario,
+        [e.target.name]: parseInt(e.target.value)
+      })
+    }
+  };
+
+
+  //SUBMIT FORMS-*****************************************************
+  const onHandleAgregarPersona = async (e) => {
+    e.preventDefault()
+    setErrAgregar();
+    setSucces();
+    const res = await fetch('https://censo.develotion.com/personas.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: localStorage.getItem("apiKey"),
+        iduser: localStorage.getItem("id")
+      },
+      body: JSON.stringify(formulario)
+    })
+
+    const resJSON = await res.json()
+    console.log(resJSON)
+    if (resJSON.codigo !== 200) {
+      setErrAgregar(resJSON.mensaje)
+    } else {
+      setSucces(resJSON.mensaje);
+      console.log(resJSON);
+      console.log({ ...formulario, id: resJSON.idCenso })
+      dispatch(agregarPersona({ ...formulario, id: resJSON.idCenso }));
+
+      setFormulario(initialFormData);
+    }
+  };
 
 
   return (
@@ -86,8 +99,8 @@ export const AgregarPersona = () => {
       <div className="fs-2">AGREGAR PERSONA </div>
       {errAgregar && <span className="alert alert-danger">{errAgregar}</span>}
       {succes && <span className="alert alert-success">{succes}</span>}
-      
-      <form className="row justify-content-center mb-5 mx-auto mainAddPersonCard" onSubmit={onHandleAgregarPersona }>
+
+      <form className="row justify-content-center mb-5 mx-auto mainAddPersonCard" onSubmit={onHandleAgregarPersona}>
         <input
           className="text-center fs-4 col-9 my-3"
           placeholder="Nombre completo"
@@ -125,8 +138,8 @@ export const AgregarPersona = () => {
             <option value="">Seleccionar</option>
             {departamentos.map((dep) => (
               <option key={dep.id} value={dep.id}>
-                {" "}
-                {dep.nombre}{" "}
+
+                {dep.nombre}
               </option>
             ))}
           </select>
@@ -141,11 +154,10 @@ export const AgregarPersona = () => {
             name="ciudad"
             value={formulario.ciudad}
           >
-            <option value="">Seleccionar</option> 
-            {ciudades.map((c) => (
+            <option value="">Seleccionar</option>
+            {ciudades.length> 0 && ciudades.map((c) => (
               <option key={c.id} value={c.id}>
-                {" "}
-                {c.nombre}{" "}
+                {c.nombre}
               </option>
             ))}
           </select>
@@ -163,14 +175,13 @@ export const AgregarPersona = () => {
             <option value="option_value_1">Seleccionar</option>
             {ocupaciones.map((o) => (
               <option key={o.id} value={o.id}>
-                {" "}
-                {o.ocupacion}{" "}
+                {o.ocupacion}
               </option>
             ))}
           </select>
         </div>
         <div className="row mx-auto text-center justify-content-center mb-3">
-          <input type="submit" value="Agregar" className="btn-Primario col-5"/>
+          <input type="submit" value="Agregar" className="btn-Primario col-5" />
         </div>
       </form>
 

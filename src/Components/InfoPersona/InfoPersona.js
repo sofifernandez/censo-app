@@ -15,14 +15,15 @@ export const InfoPersona = ({ id, nombre, ocupacion, departamento, onMessage }) 
   const dispatch = useDispatch();
 
 
-  useEffect(() => {
+   useEffect(() => {
+    
     const filteredOcupacion = ocup.find((item) => item.id === parseInt(ocupacion));
     setNombreOcupacion(filteredOcupacion.ocupacion);
     const filteredDptos = dptos.find((item) => item.id === parseInt(departamento));
     setNombreDpto(filteredDptos.nombre)
     //dispatch(buscarOcupacion(parseInt(ocupacion)))
   }, [ocupacion, ocup, departamento, dptos]);
-
+ 
   const onHandleEliminarPersona = async (e) => {
     e.preventDefault();
     const res = await fetch(

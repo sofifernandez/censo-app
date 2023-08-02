@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { useSelector } from "react-redux";
 
 export const NavBar = () => {
-    const cantidadCensados = useSelector(state => state.personas.data.length)
+    const censados = useSelector(state => state.personas.data)
+    const [censadosMontevideo, setCensadosMontevideo] = useState()
+   
+
+    useEffect(() => {
+    
+        const filteredMontevideo = censados.filter((item) => item.departamento === 3218);
+        setCensadosMontevideo(filteredMontevideo.length);
+      }, [censados]);
+      
+      console.log(censadosMontevideo);
     
     return (
         <header className="header mb-5">
@@ -15,7 +25,7 @@ export const NavBar = () => {
                 <div className="header-category">
                 <div className="header-links">
                     <div className="header-category-tag">Censados</div>
-                        <div className="header-tag-cilinder text-center verde">{ cantidadCensados}</div>
+                        <div className="header-tag-cilinder text-center verde">{ censados.length}</div>
                 </div>
             </div>
             <div className="header-category">
