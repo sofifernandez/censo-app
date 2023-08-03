@@ -11,8 +11,18 @@ import { guardarOcupaciones } from "../../features/ocupacionesSlice.js";
 import { guardarDptos } from "../../features/departamentosSlice.js";
 import { guardarPersonas } from "../../features/personasSlice.js";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import './Dashboard.css'
 
 export const Dashboard = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("usuario") === null) {
+      navigate("/");
+    }
+  }, []);
+
   const dispatch = useDispatch();
   const ocupaciones = useSelector((state) => state.ocupaciones.data);
   const censados = useSelector((state) => state.personas.data);
@@ -75,7 +85,7 @@ export const Dashboard = () => {
           dispatch(guardarPersonas(datos.personas));
         }
       });
-  },[dispatch]);
+  }, [dispatch]);
 
   return (
     <>
@@ -87,8 +97,13 @@ export const Dashboard = () => {
           <div className="container-fluid row justify-content-evenly align-items-baseline">
             <AgregarPersona />
             <ListarPersonas />
-            <GraficoDepartamentos />
-            <Mapa />
+            <div
+              id="sectionDepartamentos"
+              className="container-fluid row justify-content-evenly align-items-baseline"
+            >
+              <GraficoDepartamentos />
+              <Mapa />
+            </div>
             <GraficoOcupacion />
           </div>
         </>

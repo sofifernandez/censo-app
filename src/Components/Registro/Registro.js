@@ -74,6 +74,7 @@ export const Registro = () => {
             </div>
             <div className="row mx-auto text-center justify-content-center">
               <input
+                id="btn-Registro"
                 type="submit"
                 value="Aceptar"
                 className="btn-Primario col-6"

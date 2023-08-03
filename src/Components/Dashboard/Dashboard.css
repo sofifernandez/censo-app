@@ -1,0 +1,8 @@
+#sectionDepartamentos{
+    height: 500px;
+    margin-left: 1rem;
+    border-radius: 1rem;
+        border: 3px solid black;
+        box-shadow: 3px 3px black;
+        background-color: white;
+}

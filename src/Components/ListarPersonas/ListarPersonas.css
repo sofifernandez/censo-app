@@ -5,6 +5,11 @@
         background-color: #D3F5F0;
 }
 
+#listaPersonas{
+    overflow-y: auto;
+    height: 290px;
+}
+
 #ocuFilter{
     font-weight: 900;
     background-color: var(--amarilloClaro);

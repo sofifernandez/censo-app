@@ -84,13 +84,15 @@ export const ListarPersonas = () => {
               </div>
             )}
           </div>
-          {censadosFiltrados.length === 0
+            <div id="listaPersonas">
+              {censadosFiltrados.length === 0
             ? censados.map((c) => (
                 <InfoPersona {...c} key={c.id} onMessage={handleChildMessage} />
               ))
             : censadosFiltrados.map((c) => (
                 <InfoPersona {...c} key={c.id} onMessage={handleChildMessage} />
               ))}
+          </div>
         </div>
       )}
     </div>
