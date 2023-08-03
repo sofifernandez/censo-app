@@ -1,0 +1,13 @@
+.userData{
+    background-color: var(--amarilloClaro);
+}
+
+.userDataNumbers{
+    background-color: white;
+}
+
+.userDataNumbers {
+    background-color: var(--violeta);
+    color: white;
+    font-weight: 500;
+}

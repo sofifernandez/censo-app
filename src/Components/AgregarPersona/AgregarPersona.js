@@ -95,7 +95,7 @@ export const AgregarPersona = () => {
 
 
   return (
-    <div className="row col-12 col-sm-9 col-lg-5 justify-content-center">
+    <div className="row col-12 col-sm-11 col-lg-5 justify-content-center">
       <div className="fs-2">AGREGAR PERSONA </div>
       {errAgregar && <span className="alert alert-danger">{errAgregar}</span>}
       {succes && <span className="alert alert-success">{succes}</span>}

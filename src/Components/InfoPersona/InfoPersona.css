@@ -15,3 +15,8 @@
     box-shadow: 2px 2px rgb(54, 53, 53);
     background-color: white;
 }
+
+.listCategoryDelete:hover{
+    background-color: var(--rosado);
+    color:white;
+}

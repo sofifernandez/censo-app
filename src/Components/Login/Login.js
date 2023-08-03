@@ -44,6 +44,7 @@ export const Login = () => {
         } else {
           localStorage.setItem("id", resJSON.id);
           localStorage.setItem("apiKey", resJSON.apiKey);
+          localStorage.setItem("usuario", logInInfo.usuario)
           navigate("/dashboard")
       }
     };

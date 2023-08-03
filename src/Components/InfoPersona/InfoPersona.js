@@ -50,19 +50,19 @@ export const InfoPersona = ({ id, nombre, ocupacion, departamento, onMessage }) 
 
   return (
     <div className="mb-3 mx-auto">
-      <div className="row justify-content-evenly">
+      <div className="row mx-auto">
         <div className="col-3 my-auto idListPeople">ID: {id} </div>
-        <div className="heroline col-9 my-auto"></div>
+        <div className="heroline col-8 my-auto"></div>
       </div>
-      <div className="row justify-content-evenly">
-        <div className="col-3 pe-0 mx-2 listCategory">{nombre}</div>
-        <div className="col-2 pe-0 mx-2 listCategory">{nombreOcupacion}</div>
-        <div className="col-2 pe-0 mx-2 listCategory">{nombreDpto}</div>
-        <div className="col-2 pe-0 mx-2 ">
+      <div className="row justify-content-evenly mx-auto">
+        <div className="col-3 pe-0 mx-1 listCategory">{nombre}</div>
+        <div className="col-3 pe-0 mx-1 listCategory">{nombreOcupacion}</div>
+        <div className="col-3 pe-0 mx-1 listCategory">{nombreDpto}</div>
+        <div className="col-2 pe-0 mx-1 ">
           <input
             type="submit"
             value="Eliminar"
-            className="col-12 pe-0 mx-2 listCategoryDelete"
+            className="col-12 pe-0 listCategoryDelete fs-6"
             onClick={onHandleEliminarPersona}
           />
         </div>

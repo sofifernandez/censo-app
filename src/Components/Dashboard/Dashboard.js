@@ -14,10 +14,9 @@ import { useSelector } from "react-redux";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
-  const ocupaciones = useSelector(state => state.ocupaciones.data)
-  const censados = useSelector(state => state.personas.data)
+  const ocupaciones = useSelector((state) => state.ocupaciones.data);
+  const censados = useSelector((state) => state.personas.data);
   const departamentos = useSelector((state) => state.departamentos.data);
-
 
   //OBTENER OCUPACIONES, una vez, cuando se carga el dashboard
   useEffect(() => {
@@ -32,7 +31,7 @@ export const Dashboard = () => {
     })
       .then((response) => response.json())
       .then((datos) => {
-        console.log(datos)
+        console.log(datos);
         if (datos.codigo === 200) {
           dispatch(guardarOcupaciones(datos.ocupaciones));
         }
@@ -52,8 +51,8 @@ export const Dashboard = () => {
     })
       .then((response) => response.json())
       .then((datos) => {
-        if (datos.codigo === 200 && datos.departamentos!== undefined) {
-          dispatch(guardarDptos(datos.departamentos));          
+        if (datos.codigo === 200 && datos.departamentos !== undefined) {
+          dispatch(guardarDptos(datos.departamentos));
         }
       });
   }, [dispatch]);
@@ -72,27 +71,30 @@ export const Dashboard = () => {
     })
       .then((r) => r.json())
       .then((datos) => {
-        if (datos.codigo === 200 && datos.personas!== undefined) {
+        if (datos.codigo === 200 && datos.personas !== undefined) {
           dispatch(guardarPersonas(datos.personas));
         }
       });
-  });
+  },[dispatch]);
 
   return (
     <>
-      {ocupaciones.length>0 && departamentos.length>0 && censados!==undefined ?
-      
-      <><NavBar /><div className="container-fluid row justify-content-evenly align-items-baseline">
-          <AgregarPersona />
-          <ListarPersonas />
-          <GraficoDepartamentos />
-          <Mapa />
-          <GraficoOcupacion />
-        </div></>
-        :
+      {ocupaciones.length > 0 &&
+      departamentos.length > 0 &&
+      censados !== undefined ? (
+        <>
+          <NavBar />
+          <div className="container-fluid row justify-content-evenly align-items-baseline">
+            <AgregarPersona />
+            <ListarPersonas />
+            <GraficoDepartamentos />
+            <Mapa />
+            <GraficoOcupacion />
+          </div>
+        </>
+      ) : (
         <div className="alert alert-info">Cargando...</div>
-      }
-      
+      )}
     </>
   );
 };
