@@ -66,7 +66,7 @@ export const GraficoDepartamentos = () => {
 console.log(dptosCantidad)
 
   return (
-    <div className="row col-12 col-sm-9 col-lg-6 justify-content-center divGrafDpto">
+    <div className="row col-12 col-sm-9 col-lg-6">
       <div className="fs-2">CENSADOS POR DEPARTAMENTO </div>
       <Bar
         options={options}

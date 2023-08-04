@@ -20,6 +20,7 @@ export const AgregarPersona = () => {
   const [formulario, setFormulario] = useState(initialFormData);
   const [errAgregar, setErrAgregar] = useState(false);
   const [succes, setSucces] = useState(false);
+  const [isCompleteForm, setIsCompleteForm] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,21 +44,42 @@ export const AgregarPersona = () => {
       });
   }, [formulario.departamento]);
 
-  //SET THE FORMS***************************************************8
-
+  //SET THE FORM***************************************************8
   const handleFormAgregar = (e) => {
-    if (isNaN(e.target.value)) {
-      setFormulario({
+    // if (isNaN(e.target.value)) {
+    //   setFormulario({
+    //     ...formulario,
+    //     [e.target.name]: e.target.value,
+    //   });
+    // } else {
+    //   setFormulario({
+    //     ...formulario,
+    //     [e.target.name]: parseInt(e.target.value),
+    //   });
+    // }
+    if (e.target.name === "departamento" || e.target.name === "ciudad" || e.target.name === "ocupacion") {
+       setFormulario({
         ...formulario,
-        [e.target.name]: e.target.value,
+        [e.target.name]: parseInt(e.target.value),
       });
     } else {
       setFormulario({
         ...formulario,
-        [e.target.name]: parseInt(e.target.value),
+        [e.target.name]: e.target.value,
       });
-    }
+     }
+
   };
+
+  console.log(formulario)
+  //CHECKEAR QUE EL FORM ESTÉ COMPLETO
+  useEffect(() => {
+    if (Object.values(formulario).every((value) => !!value)) {
+      setIsCompleteForm(true);
+    } else {
+      setIsCompleteForm(false);
+      }
+  }, [formulario]);
 
   //SUBMIT FORMS-*****************************************************
   const onHandleAgregarPersona = async (e) => {
@@ -75,7 +97,6 @@ export const AgregarPersona = () => {
     });
 
     const resJSON = await res.json();
-    console.log(resJSON);
     if (resJSON.codigo !== 200) {
       setErrAgregar(resJSON.mensaje);
     } else {
@@ -89,15 +110,10 @@ export const AgregarPersona = () => {
     }, 3000);
   };
 
-  // setTimeout(setErrAgregar(false), 3000);
-  // setTimeout(setSucces(false), 3000);
 
   return (
     <div className="row col-12 col-sm-11 col-lg-5 justify-content-center">
       <div className="fs-2">AGREGAR PERSONA </div>
-      {errAgregar && <span className="alert alert-danger">{errAgregar}</span>}
-      {succes && <span className="alert alert-success">{succes}</span>}
-
       <form
         className="row justify-content-center mb-5 mx-auto px-0 mainAddPersonCard"
         onSubmit={onHandleAgregarPersona}
@@ -109,6 +125,7 @@ export const AgregarPersona = () => {
           name="nombre"
           onChange={handleFormAgregar}
           value={formulario.nombre}
+          required
         ></input>
         <div className="col-12 row justify-content-evenly mb-3">
           <div className="col-6 fw-bold fs-4 text-center my-auto addPersonCateg">
@@ -135,6 +152,7 @@ export const AgregarPersona = () => {
             name="departamento"
             onChange={handleFormAgregar}
             value={formulario.departamento}
+            required
           >
             <option value="">Seleccionar</option>
             {departamentos.length > 0 &&
@@ -154,6 +172,7 @@ export const AgregarPersona = () => {
             onChange={handleFormAgregar}
             name="ciudad"
             value={formulario.ciudad}
+            required
           >
             <option value="">Seleccionar</option>
             {ciudades.length > 0 &&
@@ -173,8 +192,9 @@ export const AgregarPersona = () => {
             onChange={handleFormAgregar}
             name="ocupacion"
             value={formulario.ocupacion}
+            required
           >
-            <option value="option_value_1">Seleccionar</option>
+            <option value="">Seleccionar</option>
             {ocupaciones.length > 0 &&
               ocupaciones.map((o) => (
                 <option key={o.id} value={o.id}>
@@ -184,9 +204,13 @@ export const AgregarPersona = () => {
           </select>
         </div>
         <div className="row mx-auto text-center justify-content-center mb-3">
-          <input type="submit" value="Agregar" className="btn-Primario col-5" />
+          <input type="submit" value="Agregar" className= {isCompleteForm ? 'btn-Primario col-5' : 'btn-disabled col-5'} disabled={!isCompleteForm} />
         </div>
       </form>
+      <div className={succes ? 'alert alert-success':'alert'}>{succes}</div>
+      <div className= {errAgregar && 'alert alert-danger'}>{errAgregar}</div>
+      {/* {errAgregar && <span className="alert alert-danger">{errAgregar}</span>}
+      {succes && <span className="alert alert-success">{succes}</span>} */}
     </div>
   );
 };

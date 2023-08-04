@@ -2,16 +2,24 @@ import React from "react";
 import "./Home.css";
 import { Login } from "../Login/Login.js";
 import { Registro } from "../Registro/Registro.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import logoCenso from "../logo_censo.png";
-//import imgCenso from '../censo.jpg';
+
 
 export const Home = () => {
   const [showRegister, setShowRegister] = useState(false);
+  const navigate = useNavigate();
 
   const handleRegisterClick = () => {
     setShowRegister(!showRegister);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("usuario") !== null) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   return (
     <div className="container-fluid bg-image row mx-0">
@@ -36,9 +44,7 @@ export const Home = () => {
             </button>
           )}
           <div id="loginRegisterText">
-            {!showRegister
-              ? "¿No tienes usuario?"
-              : "¿Ya tienes usuario?"}
+            {!showRegister ? "¿No tienes usuario?" : "¿Ya tienes usuario?"}
           </div>
           <img className="mt-5" id="img-logo" src={logoCenso} alt="logo" />
         </div>

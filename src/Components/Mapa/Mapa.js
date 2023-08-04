@@ -31,17 +31,17 @@ export const Mapa = () => {
                                   }
     });
     //frequencyMap --> {3203: 1, 3204:3, 3205:1, 3210:1}
-    const result = Object.keys(frequencyMap).map((departamento) => ({ // crea un array de objetos, recorre el frequencyMap y para cada dpto 
-    frequency: frequencyMap[departamento], //la frecuencia
-    ...departamentos.find((item) => item.id === parseInt(departamento, 10)) //los datos del array de departamentos
-  }));
+
+    const result= departamentos.map((departamento) => ({ // recorre el array de departamentos, replica la informacion de cada uno y lo une con lo que dice el frequencyMap 
+    ...departamento, 
+      frequency: frequencyMap[departamento.id] || 0, //si no existe, pone 0 en frequency
+    }));
 
     setdptosCantidad(result);
   }, [censados]);
 
  return (
-    <div className="row col-12 col-sm-9 col-lg-5 justify-content-center">
-      <div className="fs-2">MAPA </div>
+    <div className="col-12 col-sm-9 col-lg-6 ">
       <div>
         <MapContainer
           center={[-33, -56]}

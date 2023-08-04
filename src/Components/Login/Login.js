@@ -6,15 +6,11 @@ import "./Login.css";
 //sofiCenso
 
 export const Login = () => {
-  const [logInInfo, setLogInInfo] = useState();
-  const [errLogIn, setErrLogIn] = useState();
+  const [logInInfo, setLogInInfo] = useState([]);
+  const [errLogIn, setErrLogIn] = useState([]);
+  const [enableAcceptButton, setEnableAcceptButton] = useState(false)
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (localStorage.getItem("usuario") !== null) {
-      navigate("/dashboard");
-    }
-  }, []);
 
   //SET THE FORMS***************************************************8
   const handleFormLogIn = (e) => {
@@ -23,6 +19,15 @@ export const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    if (Object.keys(logInInfo).length === 2 && logInInfo.usuario.length > 0 && logInInfo.password.length > 0) {
+      setEnableAcceptButton(true)
+    } else {
+      setEnableAcceptButton(false)
+    }
+  }, [logInInfo]);
+
 
   //SUBMIT FORMS-*****************************************************
   const onHandleLogIn = async (e) => {
@@ -79,8 +84,9 @@ export const Login = () => {
               <input
                 type="submit"
                 value="Ingresar"
-                className="btn-Primario col-6"
+                className= {enableAcceptButton ? 'btn-Primario col-6' : 'btn-disabled col-6'}
                 onClick={onHandleLogIn}
+                disabled={!enableAcceptButton}
               />
             </div>
           </form>

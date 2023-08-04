@@ -31,7 +31,7 @@ form {
 
 .btn-Primario {
     border-radius: 30px;
-    color:white;
+    color: white;
     font-weight: 800;
     background-color: #6A59C3;
     border: 2px solid black;
@@ -39,3 +39,11 @@ form {
     padding-bottom: 0.6rem;
 }
 
+.btn-disabled {
+    border-radius: 30px;
+    font-weight: 800;
+    background-color: rgb(178, 176, 176);
+    border: 2px solid grey;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}

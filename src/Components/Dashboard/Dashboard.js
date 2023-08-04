@@ -94,17 +94,20 @@ export const Dashboard = () => {
       censados !== undefined ? (
         <>
           <NavBar />
-          <div className="container-fluid row justify-content-evenly align-items-baseline">
+            <div className="row container-fluid justify-content-center">
+              <div className="container-fluid row justify-content-evenly align-items-baseline">
             <AgregarPersona />
-            <ListarPersonas />
+              <ListarPersonas />
+            </div>
             <div
               id="sectionDepartamentos"
-              className="container-fluid row justify-content-evenly align-items-baseline"
+              className="col-11 container-fluid row justify-content-evenly align-items-center"
             >
               <GraficoDepartamentos />
               <Mapa />
-            </div>
+            
             <GraficoOcupacion />
+          </div>
           </div>
         </>
       ) : (

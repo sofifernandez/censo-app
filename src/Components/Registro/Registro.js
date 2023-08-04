@@ -1,18 +1,13 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Registro.css";
 
 export const Registro = () => {
   const [registerInfo, setRegisterInfo] = useState();
 	const [errRegister, setErrRegister] = useState();
-	const navigate = useNavigate();
-	
-	    useEffect(() => {
-        if (localStorage.getItem("usuario") !== null) {
-            navigate("/dashboard");
-        }
-      }, [])
+	 const navigate = useNavigate();
+
 
   //SET THE FORMS***************************************************8
   const handleFormRegister = (e) => {
@@ -41,6 +36,8 @@ export const Registro = () => {
 	else {
       localStorage.setItem("id", resJSON.id);
       localStorage.setItem("apiKey", resJSON.apiKey);
+      localStorage.setItem("usuario", registerInfo.usuario);
+      navigate("/dashboard");
     }
   };
 
