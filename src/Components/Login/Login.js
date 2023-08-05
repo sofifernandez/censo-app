@@ -18,6 +18,7 @@ export const Login = () => {
       ...logInInfo,
       [e.target.name]: e.target.value,
     });
+    console.log(logInInfo);
   };
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export const Login = () => {
 
   //SUBMIT FORMS-*****************************************************
   const onHandleLogIn = async (e) => {
+    console.log(JSON.stringify(logInInfo))
     e.preventDefault();
     const res = await fetch("https://censo.develotion.com/login.php", {
       method: "POST",
@@ -38,10 +40,10 @@ export const Login = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(logInInfo),
+      
     });
-
+    console.log(JSON.stringify(logInInfo))
     const resJSON = await res.json();
-    console.log(resJSON);
     if (resJSON.codigo !== 200) {
       setErrLogIn(resJSON.mensaje);
     } else {

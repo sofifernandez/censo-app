@@ -22,14 +22,12 @@ export const ListarPersonas = () => {
 
   const handleLimpiarFiltro = () => {
     setFiltroOcupacion(0);
-    setCensadosFiltrados([]);
+    setCensadosFiltrados(censados);
   };
 
   useEffect(() => {
     if (filtroOcupacion !== 0) {
-      setCensadosFiltrados(
-        censados.filter((c) => c.ocupacion === parseInt(filtroOcupacion))
-      );
+      setCensadosFiltrados(censados.filter((c) => c.ocupacion === parseInt(filtroOcupacion)))
     }
   }, [filtroOcupacion, censados]);
 
@@ -84,12 +82,13 @@ export const ListarPersonas = () => {
               </div>
             )}
           </div>
-            <div id="listaPersonas">
-              {censadosFiltrados.length === 0
-            ? censados.map((c) => (
+          <div id="listaPersonas">
+            {censadosFiltrados.length === 0
+              ?
+              (censados.map((c) => (
                 <InfoPersona {...c} key={c.id} onMessage={handleChildMessage} />
-              ))
-            : censadosFiltrados.map((c) => (
+              )))
+              : censadosFiltrados.map((c) => (
                 <InfoPersona {...c} key={c.id} onMessage={handleChildMessage} />
               ))}
           </div>

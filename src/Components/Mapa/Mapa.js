@@ -32,7 +32,8 @@ export const Mapa = () => {
     });
     //frequencyMap --> {3203: 1, 3204:3, 3205:1, 3210:1}
 
-    const result= departamentos.map((departamento) => ({ // recorre el array de departamentos, replica la informacion de cada uno y lo une con lo que dice el frequencyMap 
+    const result= departamentos.map((departamento) => ({ // recorre el array de departamentos, replica la informacion de cada uno y 
+                                                         // lo une con lo que dice el frequencyMap 
     ...departamento, 
       frequency: frequencyMap[departamento.id] || 0, //si no existe, pone 0 en frequency
     }));
@@ -47,7 +48,7 @@ export const Mapa = () => {
           center={[-33, -56]}
           zoom={6}
           scrollWheelZoom={false}
-          style={{ height: "300px", width: "100%" }}
+          style={{ height: "400px", width: "100%" }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

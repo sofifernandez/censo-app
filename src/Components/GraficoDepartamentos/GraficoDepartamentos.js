@@ -41,8 +41,6 @@ export const GraficoDepartamentos = () => {
  const departamentos = useSelector((state) => state.departamentos.data);
   const censados = useSelector((state) => state.personas.data);
   const [dptosCantidad, setdptosCantidad] = useState([]);
-
-
   useEffect(() => {
     const frequencyMap = {};
     censados.forEach((persona) => {
@@ -74,14 +72,13 @@ console.log(dptosCantidad)
           labels:  dptosCantidad.map((dptos) =>dptos.nombre) ,
           datasets: [
             {
-              label: "Departamentos",
+              label: "",
               data: dptosCantidad.map((dptos) => dptos.frequency),
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             }
           ],
         }}
       />
-      ;
     </div>
   );
 };

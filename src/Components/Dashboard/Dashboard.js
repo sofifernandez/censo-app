@@ -90,13 +90,13 @@ export const Dashboard = () => {
   return (
     <>
       {ocupaciones.length > 0 &&
-      departamentos.length > 0 &&
-      censados !== undefined ? (
+        departamentos.length > 0 &&
+        censados !== undefined ? (
         <>
           <NavBar />
-            <div className="row container-fluid justify-content-center">
-              <div className="container-fluid row justify-content-evenly align-items-baseline">
-            <AgregarPersona />
+          <div className="row container-fluid justify-content-center">
+            <div className="container-fluid row justify-content-evenly align-items-baseline">
+              <AgregarPersona />
               <ListarPersonas />
             </div>
             <div
@@ -105,9 +105,9 @@ export const Dashboard = () => {
             >
               <GraficoDepartamentos />
               <Mapa />
-            
-            <GraficoOcupacion />
-          </div>
+
+              <GraficoOcupacion />
+            </div>
           </div>
         </>
       ) : (

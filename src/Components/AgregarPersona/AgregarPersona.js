@@ -21,6 +21,7 @@ export const AgregarPersona = () => {
   const [errAgregar, setErrAgregar] = useState(false);
   const [succes, setSucces] = useState(false);
   const [isCompleteForm, setIsCompleteForm] = useState(false);
+  const [esMayorDeEdad, setEsMayorDeEdad] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -57,8 +58,10 @@ export const AgregarPersona = () => {
     //     [e.target.name]: parseInt(e.target.value),
     //   });
     // }
+
+
     if (e.target.name === "departamento" || e.target.name === "ciudad" || e.target.name === "ocupacion") {
-       setFormulario({
+      setFormulario({
         ...formulario,
         [e.target.name]: parseInt(e.target.value),
       });
@@ -67,18 +70,30 @@ export const AgregarPersona = () => {
         ...formulario,
         [e.target.name]: e.target.value,
       });
-     }
-
+    }
+    if(e.target.name === "fechaNacimiento"){
+      const fecha = e.target.value;
+      setEsMayorDeEdad(esMayor(fecha));
+    }
   };
 
-  console.log(formulario)
+
+  //Fecha nacimiento *****************************************************
+  const esMayor = (fechaNacimiento) => {
+    const fechaNacimientoDate = new Date(fechaNacimiento);
+    const hoy = new Date();
+    const edad = hoy.getFullYear() - fechaNacimientoDate.getFullYear();
+    return edad >= 18;
+  };
+
+ 
   //CHECKEAR QUE EL FORM ESTÉ COMPLETO
   useEffect(() => {
     if (Object.values(formulario).every((value) => !!value)) {
       setIsCompleteForm(true);
     } else {
       setIsCompleteForm(false);
-      }
+    }
   }, [formulario]);
 
   //SUBMIT FORMS-*****************************************************
@@ -139,7 +154,8 @@ export const AgregarPersona = () => {
             pattern="\d{2}/\d{2}/\d{4}"
             placeholder="MM/DD/YYYY"
             required
-            onChange={handleFormAgregar}
+            onChange={ handleFormAgregar}
+
             value={formulario.fechaNacimiento}
           />
         </div>
@@ -195,20 +211,24 @@ export const AgregarPersona = () => {
             required
           >
             <option value="">Seleccionar</option>
-            {ocupaciones.length > 0 &&
+            {esMayorDeEdad ? (
+              ocupaciones.length > 0 &&
               ocupaciones.map((o) => (
                 <option key={o.id} value={o.id}>
                   {o.ocupacion}
                 </option>
-              ))}
+              ))
+            ) : (
+              <option value="5">Estudiante</option>
+            )}
           </select>
         </div>
         <div className="row mx-auto text-center justify-content-center mb-3">
-          <input type="submit" value="Agregar" className= {isCompleteForm ? 'btn-Primario col-5' : 'btn-disabled col-5'} disabled={!isCompleteForm} />
+          <input type="submit" value="Agregar" className={isCompleteForm ? 'btn-Primario col-5' : 'btn-disabled col-5'} disabled={!isCompleteForm} />
         </div>
       </form>
-      <div className={succes ? 'alert alert-success':'alert'}>{succes}</div>
-      <div className= {errAgregar && 'alert alert-danger'}>{errAgregar}</div>
+      <div className={succes ? 'alert alert-success' : 'alert'}>{succes}</div>
+      <div className={errAgregar && 'alert alert-danger'}>{errAgregar}</div>
       {/* {errAgregar && <span className="alert alert-danger">{errAgregar}</span>}
       {succes && <span className="alert alert-success">{succes}</span>} */}
     </div>
