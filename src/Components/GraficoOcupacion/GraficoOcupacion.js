@@ -10,8 +10,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export const GraficoOcupacion = () => {
   const ocupaciones = useSelector((state) => state.ocupaciones.data);
   const censados = useSelector((state) => state.personas.data);
-  const [ocupaCantidad, setocupaCantidad] = useState([]);
-  console.log(ocupaciones)
+  const [ocupaCantidad, setOcupaCantidad] = useState([]);
 
   useEffect(() => {
     const frequencyMap = {};
@@ -30,14 +29,14 @@ export const GraficoOcupacion = () => {
       ...ocupaciones.find((item) => item.id === parseInt(ocupacion, 10)) //los datos del array de ocupaciones
     }));
 
-    setocupaCantidad(result);
+    setOcupaCantidad(result);
   }, [censados]);
 
 
 
 
   return (
-    <div className="row col-12 col-sm-9 col-lg-6 justify-content-center text-center">
+    <div className="row col-12 col-sm-9 col-lg-6 justify-content-center text-center mt-3">
       <div className="fs-2">CENSADOS POR OCUPACIÓN</div>
       <div className='row justify-content-center'>
         <Pie data={{

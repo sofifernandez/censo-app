@@ -9,18 +9,21 @@ export const InfoPersona = ({ id, nombre, ocupacion, departamento, onMessage }) 
   const [nombreOcupacion, setNombreOcupacion] = useState([]);
   const [nombreDpto, setNombreDpto] = useState([]);
   const ocup = useSelector((state) => state.ocupaciones.data);
-  const dptos=useSelector((state) => state.departamentos.data);
+  const dptos = useSelector((state) => state.departamentos.data);
   const [mensaje, setMensaje] = useState("");
   const dispatch = useDispatch();
 
-
    useEffect(() => {
+
     const filteredOcupacion = ocup.find((item) => item.id === parseInt(ocupacion));
-    setNombreOcupacion(filteredOcupacion.ocupacion);
     const filteredDptos = dptos.find((item) => item.id === parseInt(departamento));
-    setNombreDpto(filteredDptos.nombre)
-  }, [ocupacion, ocup, departamento, dptos]);
- 
+    if (filteredOcupacion.ocupacion !== "" && filteredDptos.nombre !== "") {
+      setNombreOcupacion(filteredOcupacion.ocupacion);
+      setNombreDpto(filteredDptos.nombre)
+    }
+
+  }, [ocupacion, ocup, departamento, dptos]); 
+
   const onHandleEliminarPersona = async (e) => {
     e.preventDefault();
     const res = await fetch(
@@ -39,13 +42,13 @@ export const InfoPersona = ({ id, nombre, ocupacion, departamento, onMessage }) 
     setMensaje(resJSON)
     sendMessageToParent();
     if (resJSON.codigo === 200) {
-      dispatch(eliminarPersona(id)); 
+      dispatch(eliminarPersona(id));
     }
-    
+
   };
 
-    const sendMessageToParent = () => {
-    onMessage(mensaje); 
+  const sendMessageToParent = () => {
+    onMessage(mensaje);
   };
 
   return (
