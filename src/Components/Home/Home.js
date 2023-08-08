@@ -23,8 +23,8 @@ export const Home = () => {
 
   return (
     <div className="container-fluid bg-image row mx-0">
-      <div className="row main-content text-center m-auto px-0">
-        <div className="col-md-4 text-center company__info align-items-center">
+      <div className="row main-content col-md-9 col-lg-6 text-center m-auto px-0">
+        <div className="col-4 text-center company__info align-items-center">
           {!showRegister ? (
             <button
               id="btn-Registro"

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-//sofiCenso
 
 export const Login = () => {
   const [logInInfo, setLogInInfo] = useState([]);
@@ -18,7 +17,6 @@ export const Login = () => {
       ...logInInfo,
       [e.target.name]: e.target.value,
     });
-    console.log(logInInfo);
   };
 
   useEffect(() => {
@@ -32,7 +30,6 @@ export const Login = () => {
 
   //SUBMIT FORMS-*****************************************************
   const onHandleLogIn = async (e) => {
-    console.log(JSON.stringify(logInInfo))
     e.preventDefault();
     const res = await fetch("https://censo.develotion.com/login.php", {
       method: "POST",
@@ -42,7 +39,6 @@ export const Login = () => {
       body: JSON.stringify(logInInfo),
       
     });
-    console.log(JSON.stringify(logInInfo))
     const resJSON = await res.json();
     if (resJSON.codigo !== 200) {
       setErrLogIn(resJSON.mensaje);
@@ -55,7 +51,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="col-md-8 col-xs-12 col-sm-12 login_form">
+    <div className="col-8 login_form">
       <div className="container-fluid">
         <div className="row">
           <h2>Log in</h2>

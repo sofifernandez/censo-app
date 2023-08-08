@@ -11,7 +11,12 @@
   transition: all 0.5s ease;
 }
 
-#btn-Registro{
+.btn-Registro {
+  border-radius: 30px;
+  font-weight: 800;
+  border: 2px solid black;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
   background-color: var(--verde);
   color: black;
 }

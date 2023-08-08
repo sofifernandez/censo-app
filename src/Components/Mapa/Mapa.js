@@ -42,7 +42,7 @@ export const Mapa = () => {
   }, [censados]);
 
  return (
-    <div className="col-12 col-sm-9 col-lg-6 ">
+    <div className="col-12 col-sm-9 col-lg-6 px-0">
       <div>
         <MapContainer
           center={[-33, -56]}

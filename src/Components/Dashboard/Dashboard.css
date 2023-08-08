@@ -1,6 +1,19 @@
-#sectionDepartamentos {
+#sectionAnalisis {
   border-radius: 1rem;
   border: 3px solid black;
   box-shadow: 3px 3px black;
   background-color: white;
 }
+
+#sectionResumen{
+    border-radius: 1rem;
+      border: 3px solid black;
+      box-shadow: 3px 3px black;
+      background-color: #D3F5F0;
+}
+
+.mainBody{
+    background-color: #FAFAF0;
+}
+
+

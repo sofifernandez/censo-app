@@ -22,7 +22,7 @@ export const NavBar = () => {
   }, []);
 
   return (
-    <header className="header mb-5">
+    <header className="header">
       <div className="heroline"></div>
       <div className="d-flex flex-wrap justify-content-between">
         <div>

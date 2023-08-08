@@ -1,11 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Registro.css";
 
 export const Registro = () => {
-  const [registerInfo, setRegisterInfo] = useState();
-	const [errRegister, setErrRegister] = useState();
+  const [registerInfo, setRegisterInfo] = useState([]);
+  const [errRegister, setErrRegister] = useState([]);
+  const [enableRegisterButton, setEnableRegisterButtonn] = useState(false);
 	 const navigate = useNavigate();
 
 
@@ -16,6 +17,14 @@ export const Registro = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+    useEffect(() => {
+    if (Object.keys(registerInfo).length === 2 && registerInfo.usuario.length > 0 && registerInfo.password.length > 0) {
+      setEnableRegisterButtonn(true)
+    } else {
+      setEnableRegisterButtonn(false)
+    }
+  }, [registerInfo]);
 
   //SUBMIT FORMS-*****************************************************
   const onHandleRegister = async (e) => {
@@ -42,7 +51,7 @@ export const Registro = () => {
   };
 
   return (
-    <div className="col-md-8 col-xs-12 col-sm-12 login_form ">
+    <div className="col-8 login_form ">
       <div className="container-fluid">
         <div className="row">
           <h2>Registrarse</h2>
@@ -71,11 +80,11 @@ export const Registro = () => {
             </div>
             <div className="row mx-auto text-center justify-content-center">
               <input
-                id="btn-Registro"
                 type="submit"
                 value="Aceptar"
-                className="btn-Primario col-6"
+                className= {enableRegisterButton ? 'btn-Registro col-6' : 'btn-disabled col-6'}
                 onClick={onHandleRegister}
+                disabled={!enableRegisterButton}
               />
             </div>
           </form>

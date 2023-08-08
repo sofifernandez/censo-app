@@ -5,12 +5,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { eliminarPersona } from "../../features/personasSlice";
 
-export const InfoPersona = ({ id, nombre, ocupacion, departamento, onMessage }) => {
+export const InfoPersona = ({ id, nombre, ocupacion, departamento }) => {
   const [nombreOcupacion, setNombreOcupacion] = useState([]);
   const [nombreDpto, setNombreDpto] = useState([]);
   const ocup = useSelector((state) => state.ocupaciones.data);
   const dptos = useSelector((state) => state.departamentos.data);
-  const [mensaje, setMensaje] = useState("");
   const dispatch = useDispatch();
 
    useEffect(() => {
@@ -39,16 +38,10 @@ export const InfoPersona = ({ id, nombre, ocupacion, departamento, onMessage }) 
       }
     );
     const resJSON = await res.json();
-    setMensaje(resJSON)
-    sendMessageToParent();
     if (resJSON.codigo === 200) {
       dispatch(eliminarPersona(id));
     }
 
-  };
-
-  const sendMessageToParent = () => {
-    onMessage(mensaje);
   };
 
   return (

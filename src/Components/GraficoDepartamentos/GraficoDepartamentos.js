@@ -61,11 +61,12 @@ export const GraficoDepartamentos = () => {
     setdptosCantidad(result);
   }, [censados]);
 
-console.log(dptosCantidad)
 
   return (
     <div className="row col-12 col-sm-9 col-lg-6">
       <div className="fs-2">CENSADOS POR DEPARTAMENTO </div>
+      {censados.length === 0 ? 
+        <div className="alert alert-warning">No hay existencias</div> :
       <Bar
         options={options}
         data={{
@@ -79,6 +80,8 @@ console.log(dptosCantidad)
           ],
         }}
       />
+      }
+      
     </div>
   );
 };

@@ -130,7 +130,7 @@ export const AgregarPersona = () => {
     <div className="row col-12 col-sm-11 col-lg-5 justify-content-center">
       <div className="fs-2">AGREGAR PERSONA </div>
       <form
-        className="row justify-content-center mb-5 mx-auto px-0 mainAddPersonCard"
+        className="row justify-content-center mx-auto px-0 mainAddPersonCard"
         onSubmit={onHandleAgregarPersona}
       >
         <input

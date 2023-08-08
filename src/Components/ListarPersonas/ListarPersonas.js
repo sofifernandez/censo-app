@@ -8,13 +8,9 @@ export const ListarPersonas = () => {
   const ocupaciones = useSelector((state) => state.ocupaciones.data);
   const censados = useSelector((state) => state.personas.data);
 
-  const [mensajeEliminar, setmensajeEliminar] = useState("");
   const [filtroOcupacion, setFiltroOcupacion] = useState(0);
   const [censadosFiltrados, setCensadosFiltrados] = useState([]);
 
-  const handleChildMessage = (message) => {
-    setmensajeEliminar(message);
-  };
 
   const handleFiltroOcupacion = (e) => {
     setFiltroOcupacion(e.target.value);
@@ -31,27 +27,18 @@ export const ListarPersonas = () => {
     }
   }, [filtroOcupacion, censados]);
 
+ console.log(filtroOcupacion)
+
   return (
     <div className="row col-12 col-sm-11 col-lg-7 justify-content-center">
       <div className="fs-2">LISTA DE PERSONAS </div>
-      {mensajeEliminar && (
-        <span
-          className={
-            mensajeEliminar.codigo === 200
-              ? "alert alert-success"
-              : "alert alert-danger"
-          }
-        >
-          {mensajeEliminar.mensaje}
-        </span>
-      )}
       {censados.length === 0 ? (
         <div className="alert alert-warning">No hay existencias</div>
       ) : (
-        <div id="listarSection" className="mb-5 mx-auto py-3 px-0">
+        <div id="listarSection" className=" mx-auto py-3 px-0">
           <div className="row mb-3 mx-auto justify-content-evenly">
             <div className="col-3 pe-0 mx-1 listCategoryHeader">
-              Nombre completo
+              Nombre
             </div>
 
             <select
@@ -78,22 +65,23 @@ export const ListarPersonas = () => {
                 className="col-2 pe-0 mx-1 deleteFilterButton"
                 onClick={handleLimpiarFiltro}
               >
-                Limpiar filtro
+                Limpiar
               </div>
             )}
           </div>
           <div id="listaPersonas">
-            {censadosFiltrados.length === 0
+            {filtroOcupacion === 0
               ?
               (censados.map((c) => (
-                <InfoPersona {...c} key={c.id} onMessage={handleChildMessage} />
+                <InfoPersona {...c} key={c.id} />
               )))
               : censadosFiltrados.map((c) => (
-                <InfoPersona {...c} key={c.id} onMessage={handleChildMessage} />
+                <InfoPersona {...c} key={c.id} />
               ))}
           </div>
         </div>
       )}
+      <div className="alert"></div>
     </div>
   );
 };
